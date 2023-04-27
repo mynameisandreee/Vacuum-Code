@@ -1,0 +1,23 @@
+#square {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: grey;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+#object {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
