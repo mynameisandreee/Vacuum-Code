@@ -15,6 +15,7 @@ function createSquare() {
 function createObject() {
   object = document.createElement("div");
   object.id = "object";
+  object.direction = "right";
   document.body.appendChild(object);
   moveObject();
 }
@@ -26,10 +27,29 @@ function moveObject() {
   var currentPositionY = parseInt(object.style.top) || 0;
   var nextPositionX = currentPositionX;
   var nextPositionY = currentPositionY;
-  
  
-  
-  
+  // if we are at the end of the grid, then just return
+  if (nextPositionY >= 200 && currentPositionX >= 180) {
+	return;
+  }
+ 
+  if (object.direction == "right" && currentPositionX < 180) {
+	if (currentPositionX == 0) turns += 1;
+	nextPositionX += 20;	// right
+  } else if (object.direction == "right" && currentPositionX >= 180) {
+	nextPositionY += 20;
+	turns+= 1;		// down and turn left
+	object.direction = "left";
+  } else if (object.direction == "left" && currentPositionX > 0) {
+	if (currentPositionX >= 180) turns += 1;   // count left turn
+	nextPositionX -= 20;   // left
+  } else if (object.direction == "left" && currentPositionX <= 0) {
+	nextPositionY += 20;
+	object.direction = "right";  // down and turn right
+	turns += 1;
+  } 
+ 
+/**** 
   if (currentPositionY == 0 && currentPositionX < 180) {    //right
     nextPositionX += 20;
   }if (currentPositionX == 180 && currentPositionY == 0) {  //down
@@ -100,6 +120,7 @@ function moveObject() {
     nextPositionX-= 20;
   }
 
+******************/
   
   object.style.left = nextPositionX + "px";
   object.style.top = nextPositionY + "px";
